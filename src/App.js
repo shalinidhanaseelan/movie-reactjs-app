@@ -12,19 +12,16 @@ const App = () => {
   const [searchValue, setSearchValue] = useState("");
 
   const getMovieRequest = async (searchValue) => {
-    if (searchValue) {
-      const url = `https://www.omdbapi.com/?s=${searchValue}&apikey=7499c8f6`;
-      try {
-        const response = await fetch(url);
-        const responseJson = await response.json();
+    const url = `https://www.omdbapi.com/?s=${searchValue}&apikey=7499c8f6`;
+    try {
+      const response = await fetch(url);
+      const responseJson = await response.json();
 
-        console.log(responseJson);
-        if (responseJson.Search) {
-          setMovies(responseJson.Search);
-        }
-      } catch (error) {
-        console.log(error);
+      if (responseJson.Search) {
+        setMovies(responseJson.Search);
       }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -34,8 +31,8 @@ const App = () => {
   };
 
   useEffect(() => {
-    getMovieRequest();
-  }, []);
+    getMovieRequest(searchValue);
+  }, [searchValue]);
 
   return (
     <div className="container-fluid movie-app">
