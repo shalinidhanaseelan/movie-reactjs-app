@@ -4,12 +4,10 @@ import "./App.css";
 import MovieList from "./components/MovieList";
 import MovieListHeading from "./components/MovieListHeading";
 import SearchBox from "./components/SearchBox";
-import AddFav from "./components/AddFav";
 
 const App = () => {
   const [movies, setMovies] = useState([]);
-  const [favourites, setFavourites] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState("star wars");
 
   const getMovieRequest = async (searchValue) => {
     const url = `https://www.omdbapi.com/?s=${searchValue}&apikey=7499c8f6`;
@@ -25,11 +23,6 @@ const App = () => {
     }
   };
 
-  const addFavouriteMovie = (movie) => {
-    const newFavouriteList = [...favourites, movie];
-    setFavourites(newFavouriteList);
-  };
-
   useEffect(() => {
     getMovieRequest(searchValue);
   }, [searchValue]);
@@ -41,11 +34,7 @@ const App = () => {
         <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
       <div className="row">
-        <MovieList
-          movies={movies}
-          handleFavouritesClick={addFavouriteMovie}
-          favouriteComponent={AddFav}
-        />
+        <MovieList movies={movies} />
       </div>
     </div>
   );
