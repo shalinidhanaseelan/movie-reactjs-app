@@ -1,2 +1,2 @@
-# movie-reactjs-app
+# movie-reactks-app
 Created with CodeSandbox
